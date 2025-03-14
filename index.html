@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classification de Biomarqueurs</title>
+    <title>Biomarkers classification</title>
     <style>
         :root {
             --primary-color: #b134db;
@@ -235,7 +235,7 @@
 </div>
 
 <script>
-    // Définition de l'énumération des questions
+    
     const Question = {
         START: 'start',
 
@@ -276,7 +276,7 @@
         FINAL: 'final'
     };
 
-    // Textes des questions
+   
     const questionTexts = {
         [Question.START]: "Start",
 
@@ -319,7 +319,7 @@
         [Question.FINAL]: "Your software function is likely a device that is the focus of the FDA's regulatory oversight"
     };
 
-    // Chemins pour les réponses "Oui"
+
     const yesPath = {
         [Question.START]: Question.QUESTION1,
         [Question.ENFORCE_DISCRETION]: null,
@@ -359,7 +359,7 @@
         [Question.QUESTION7F]: Question.REGULATORY_OVERSIGHT
     };
 
-    // Chemins pour les réponses "Non"
+    
     const noPath = {
         [Question.START]: Question.QUESTION1,
 
@@ -406,7 +406,7 @@
     let currentQuestion = Question.START;
     let questionHistory = [];
 
-    // Éléments DOM
+    
     const startScreen = document.getElementById("startScreen");
     const questionScreen = document.getElementById("questionScreen");
     const resultScreen = document.getElementById("resultScreen");
@@ -421,7 +421,7 @@
     const restartButton = document.getElementById("restartButton");
     const progressBar = document.getElementById("progressBar");
 
-    // Gestion des événements
+    
     startButton.addEventListener("click", function() {
         biomarkerName = biomarkerNameInput.value.trim();
         if (biomarkerName) {
@@ -451,27 +451,27 @@
         reset();
     });
 
-    // Fonction pour traiter les réponses
+    
     function processAnswer(answer) {
-        // Ajouter la question actuelle à l'historique
+    
         questionHistory.push(currentQuestion);
 
-        // Obtenir la question suivante en fonction de la réponse
+    
         const nextQuestion = answer ? yesPath[currentQuestion] : noPath[currentQuestion];
 
         if (nextQuestion !== null) {
-            // Passer à la question suivante
+    
             currentQuestion = nextQuestion;
             updateQuestionDisplay();
         } else {
-            // Nous avons atteint un résultat final
+    
             showResult(currentQuestion);
         }
 
         updateProgressBar();
     }
 
-    // Fonction pour afficher la question actuelle
+    
     function updateQuestionDisplay() {
         if (currentQuestion === Question.NOT_A_DEVICE ||
             currentQuestion === Question.ENFORCE_DISCRETION ||
@@ -484,7 +484,7 @@
         }
     }
 
-    // Fonction pour revenir à la question précédente
+    
     function goBack() {
         if (questionHistory.length > 0) {
             currentQuestion = questionHistory.pop();
@@ -493,7 +493,7 @@
         }
     }
 
-    // Fonction pour afficher le résultat
+    
     function showResult(resultQuestion) {
         questionScreen.classList.add("hidden");
         resultScreen.classList.remove("hidden");
