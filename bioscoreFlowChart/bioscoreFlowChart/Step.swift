@@ -114,7 +114,7 @@ func makeSteps(state: FlowState) -> [AnyStep] {
         
         
         
-        .multipleChoice(id: 6, question: "Taking into account the biomarker's hypothesis developement and the intended use or purpose of the test, how you would like to classify this biomarker?", options: [("General wellness", 8), ("Clinical", 8)], end: false),
+        .multipleChoice(id: 6, question: "Taking into account the biomarker's hypothesis developement and the intended use or purpose of the test, how you would like to classify this biomarker?", options: [("General wellness", 8), ("Clinical", 7)], end: false),
         
         .question(id: 7, question: "Detected clinical use: this case is out of scope for the algorithm", next: nil, decision: false, yes: nil, no: nil, end: true),
         
@@ -168,6 +168,7 @@ func makeSteps(state: FlowState) -> [AnyStep] {
             state.improvementGeneralHealth > state.t1 || state.riskReductionChronicDisease > state.t2 || state.supportLivingWithChronicDisease > state.t3
         }, yes: 16, no: 12, end: false),
         
+        .question(id: 16, question: "Health outcomes generally accepted.", next: 17, decision: false, yes: nil, no: nil, end: false),
         
         .multipleChoice(id: 17, question: "Are there peer-reviewed scientific publications", options: [("Yes",18), ("No",22)], end: false),
         
@@ -221,7 +222,7 @@ func makeSteps(state: FlowState) -> [AnyStep] {
         }, next: 22, end: false),
         
         
-        .functionDecision(id: 27, test: { <#Any?#> in
+        .functionDecision(id: 27, test: { _ in
             state.validPublicationCount + state.validStatementCound > 3
         }, yes: 29, no: 28, end: false),
         
