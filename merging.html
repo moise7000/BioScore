@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biomarker Results Merger</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h2>Biomarker Results Merger</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #007bff;">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14,2 14,8 20,8"></polyline>
+      <line x1="16" y1="13" x2="8" y2="13"></line>
+      <line x1="16" y1="17" x2="8" y2="17"></line>
+      <polyline points="10,9 9,9 8,9"></polyline>
+    </svg>
+  </header>
+
+  <div id="welcome-screen" class="welcome-screen">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+      <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+      <path d="M12 11h4"></path>
+      <path d="M12 16h4"></path>
+      <path d="M8 11h.01"></path>
+      <path d="M8 16h.01"></path>
+    </svg>
+    <h1>Biomarker Results Merger</h1>
+    <p>Upload multiple biomarker classification JSON files to merge results and generate comprehensive reports.</p>
+    <button id="start-merger">Start Merging</button>
+  </div>
+
+  <div id="merger-interface" style="display: none;">
+    <!-- Upload Section -->
+    <div class="card">
+      <h3>Upload JSON Files</h3>
+      <div class="upload-area" id="upload-area">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px; color: #666;">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7,10 12,15 17,10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <p>Drop JSON files here or click to browse</p>
+        <p style="font-size: 12px; color: #666;">Supported: .json files from biomarker classification</p>
+      </div>
+      <input type="file" id="file-input" class="file-input" multiple accept=".json">
+
+      <div class="file-list" id="file-list"></div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div id="stats-section" style="display: none;">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="total-biomarkers">0</div>
+          <div class="stat-label">Total Biomarkers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="high-significance">0</div>
+          <div class="stat-label">High Significance</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="good-biomarkers">0</div>
+          <div class="stat-label">Good Biomarkers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="unproven-significance">0</div>
+          <div class="stat-label">Unproven</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" style="display: none;">
+      <div class="results-grid">
+        <!-- Summary Panel -->
+        <div class="summary-card">
+          <h3>Merge Summary</h3>
+          <div class="summary-item">
+            <span>Files processed:</span>
+            <span class="summary-value" id="files-processed">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Total classifications:</span>
+            <span class="summary-value" id="total-classifications">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Unique biomarkers:</span>
+            <span class="summary-value" id="unique-biomarkers">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Average processing time:</span>
+            <span class="summary-value" id="avg-processing-time">0s</span>
+          </div>
+        </div>
+
+        <!-- Results Distribution -->
+        <div class="summary-card">
+          <h3>Results Distribution</h3>
+          <div class="summary-item">
+            <span>High scientific significance:</span>
+            <span class="summary-value" id="dist-high-significance">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Not good biomarkers:</span>
+            <span class="summary-value" id="dist-not-good">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Unproven significance:</span>
+            <span class="summary-value" id="dist-unproven">0</span>
+          </div>
+          <div class="summary-item">
+            <span>Clinical use cases:</span>
+            <span class="summary-value" id="dist-clinical">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Results Table -->
+      <div class="card">
+        <h3>Detailed Results</h3>
+        <table class="biomarker-table" id="results-table">
+          <thead>
+          <tr>
+            <th>Biomarker Name</th>
+            <th>Final Result</th>
+            <th>Consistency</th>
+            <th>Reproducibility</th>
+            <th>Specificity</th>
+            <th>Scientific Evidence</th>
+            <th>Processing Time</th>
+          </tr>
+          </thead>
+          <tbody id="results-tbody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button id="clear-all" class="secondary">Clear All</button>
+      <button id="export-merged" class="export-button" disabled>Export Merged Results</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/merge.js"></script>
+</body>
+</html>

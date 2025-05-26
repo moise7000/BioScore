@@ -1,0 +1,319 @@
+
+:root {
+    --primary-color: #0066cc;
+    --secondary-color: #f0f0f0;
+    --text-color: #333;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --error-color: #f44336;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: #fafafa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+.welcome-screen {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.welcome-screen svg {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0055aa;
+}
+
+button.secondary {
+    background-color: #fff;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+button.secondary:hover {
+    background-color: #f5f5f5;
+}
+
+button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.upload-area.dragover {
+    border-color: var(--primary-color);
+    background-color: #f0f8ff;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+}
+
+.file-input {
+    display: none;
+}
+
+.file-list {
+    margin-top: 20px;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.file-name {
+    font-weight: 500;
+}
+
+.file-status {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: white;
+}
+
+.file-status.success {
+    background-color: var(--success-color);
+}
+
+.file-status.error {
+    background-color: var(--error-color);
+}
+
+.file-status.pending {
+    background-color: var(--warning-color);
+}
+
+.remove-file {
+    background-color: var(--error-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.summary-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-value {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.biomarker-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.biomarker-table th,
+.biomarker-table td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.biomarker-table th {
+    background-color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.biomarker-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.result-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+}
+
+.result-good {
+    background-color: var(--success-color);
+}
+
+.result-unproven {
+    background-color: var(--warning-color);
+}
+
+.result-not-good {
+    background-color: var(--error-color);
+}
+
+.result-clinical {
+    background-color: #6c757d;
+}
+
+.result-high-significance {
+    background-color: #17a2b8;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.export-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.export-button:hover {
+    background-color: #218838;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, var(--primary-color), #0055aa);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.error-message {
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    color: #c53030;
+    padding: 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .biomarker-table {
+        font-size: 14px;
+    }
+
+    .biomarker-table th,
+    .biomarker-table td {
+        padding: 8px;
+    }
+}
